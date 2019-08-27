@@ -15,7 +15,7 @@ from own.model.DeeplabV3 import *
 
 def Train(model, train_loader, criterion, optimizer, device, metrics=None, lr_scheduler=None, epoch=30):
     """
-
+    训练模型
     :param model: 模型
     :param train_loader: 训练集
     :param criterion: 损失
@@ -28,11 +28,11 @@ def Train(model, train_loader, criterion, optimizer, device, metrics=None, lr_sc
     """
     model.train()
     for batch_idx, (image, label) in enumerate(train_loader):
-        # show_data(image, label)
+        # show_train_data(image, label)
         image, label = image.to(device), label.to(device)
         optimizer.zero_grad()
         output = model(image)
-        # VOC 2007 输入图片为PNG格式 ，单通道
+        # VOC 2007 输入图片为PNG格式 ，单通道，输入label为（Batch，1, H，W）格式 需要转换成（Batch，H，W）
         label = label.long().squeeze(1)
         loss = criterion(output, label)
         loss.backward()
@@ -44,12 +44,13 @@ def Train(model, train_loader, criterion, optimizer, device, metrics=None, lr_sc
                          batch_idx * len(image),
                          len(train_loader.dataset),
                          100. * batch_idx / len(train_loader),
-                         loss.item()))
+                         loss.item())
+                  )
 
 
 def Test(model, test_loader, criterion, device):
     """
-
+    测试模型
     :param model: 模型
     :param test_loader: 测试集
     :param criterion: 损失
@@ -63,27 +64,39 @@ def Test(model, test_loader, criterion, device):
         for image, label in test_loader:
             image, label = image.to(device), label.to(device)
             output = model(image)
-            loss = criterion(output, label.long().unsqueeze(0))
+            label = label.long().squeeze(1)
+            loss = criterion(output, label)
             test_loss += loss.item()
+            # 获取最大对数概率的索引 output channel 20个中找个最大的
             pred = output.argmax(dim=1, keepdim=True)
             correct += pred.eq(label.view_as(pred)).sum().item()
 
-    test_loss /= len(test_loss.dataset)
-    print('\nTest set: Average loss: {:.4f}, Accuracy: {}/{} ({:.0f}%)\n'.format(
-        loss, correct, len(test_loader.dataset),
-        100. * correct / len(test_loader.dataset)))
+    test_loss /= len(test_loader.dataset)
+    print('\nTest set: Average loss: {:.4f}, Accuracy: {}/{} ({:.0f}%)\n'.
+          format(loss,
+                 correct, len(test_loader.dataset),
+                 100. * correct / len(test_loader.dataset))
+          )
 
 
-def show_data(image, label):
+def show_train_data(image, label):
+    """
+    展示经过transform之后的图片与标签
+    :param image:
+    :param label:
+    :return:
+    """
     plt.subplot(121)
     a = image[1, :, :, :]
     plt.imshow(a.permute(1, 2, 0))
     plt.subplot(122)
-    b = label[1, 1, :, :]
+    # PNG图片只需要（H，W）
+    b = label[1, 0, :, :]
     plt.imshow(b)
     plt.show()
     plt.pause(0.1)
     plt.close()
+
 
 def main():
     transform = transforms.Compose([transforms.CenterCrop(500),
@@ -106,16 +119,19 @@ def main():
     train_loader = torch.utils.data.DataLoader(train_data, batch_size=2, drop_last=True)
     test_loader = torch.utils.data.DataLoader(test_data, batch_size=2, drop_last=True)
 
+    # 设置GPU
     torch.cuda.set_device(3)
     device = torch.device("cuda")
+    # 初始化模型，损失，优化器
     model = Deeplab().to(device)
     loss = nn.CrossEntropyLoss().to(device)
     optimizer = optim.SGD(model.parameters(), lr=0.0001, momentum=0.8)
-
+    # 开始训练
     for epoch in range(30):
         Train(model, train_loader=train_loader,
               criterion=loss, optimizer=optimizer,
               device=device, epoch=epoch)
+        Test(model, test_loader, loss, device)
 
 
 if __name__ == '__main__':
