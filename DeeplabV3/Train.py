@@ -6,6 +6,7 @@
 @Email   : july.master@outlook.com
 """
 import matplotlib.pyplot as plt
+import numpy as np
 import torch.optim as optim
 from torchvision import transforms
 from torchvision.datasets.voc import VOCSegmentation
@@ -60,6 +61,7 @@ def Test(model, test_loader, criterion, device):
     model.eval()
     test_loss = 0
     correct = 0
+    confusion_matrix = np.zeros((20, 20))
     with torch.no_grad():
         for image, label in test_loader:
             image, label = image.to(device), label.to(device)
@@ -69,15 +71,28 @@ def Test(model, test_loader, criterion, device):
             test_loss += loss.item()
             # 获取最大对数概率的索引 output channel 20个中找个最大的
             pred = output.argmax(dim=1, keepdim=True)
-            correct += pred.eq(label.view_as(pred)).sum().item()
 
+            # PA像素精度
+            num_class = 20
+            pre_image = pred.squeeze(1).cpu().numpy()
+            plt.imshow(pre_image[0,:,:])
+            plt.show()
+            gt_image = label.cpu().numpy()
+
+            confusion_matrix += fast_hist(gt_image, pre_image, num_class)
+
+    correct = np.diag(confusion_matrix).sum() / confusion_matrix.sum()
     test_loss /= len(test_loader.dataset)
-    print('\nTest set: Average loss: {:.4f}, Accuracy: {}/{} ({:.0f}%)\n'.
+    print('\nTest set: Average loss: {:.4f}, Accuracy: {}\n'.
           format(loss,
-                 correct, len(test_loader.dataset),
-                 100. * correct / len(test_loader.dataset))
+                 correct,
+                 )
           )
 
+
+def fast_hist(a, b, n):
+    k = (a >= 0) & (a < n)
+    return np.bincount(n * a[k].astype(int) + b[k], minlength=n**2).reshape(n, n)
 
 def show_train_data(image, label):
     """
@@ -120,13 +135,14 @@ def main():
     test_loader = torch.utils.data.DataLoader(test_data, batch_size=2, drop_last=True)
 
     # 设置GPU
-    torch.cuda.set_device(3)
+    torch.cuda.set_device(1)
     device = torch.device("cuda")
     # 初始化模型，损失，优化器
     model = Deeplab().to(device)
     loss = nn.CrossEntropyLoss().to(device)
     optimizer = optim.SGD(model.parameters(), lr=0.0001, momentum=0.8)
     # 开始训练
+    confusion_matrix = np.zeros((20, 20))
     for epoch in range(30):
         Train(model, train_loader=train_loader,
               criterion=loss, optimizer=optimizer,
