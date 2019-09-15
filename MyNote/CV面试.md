@@ -4,8 +4,6 @@
 
 ![img](image/v2-c0172be282021a1029f7b72b51079ffe_hd.jpg)
 
-![img](image/20170324121024882)
-
 **流程**
 
 * Backbone。先通过主干网络提取特征图
