@@ -1,5 +1,6 @@
 *.sh
 .vscode
+/EL-Defect-Detection/文献
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
