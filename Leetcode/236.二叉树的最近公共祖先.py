@@ -93,5 +93,7 @@ if __name__ == "__main__":
     root = [3,5,1,6,2,0,8,null,null,7,4]
     a = Solution()
     b = a.ListCreatTree(root)
-    print(b.left.left.val)
+    print(b.right)
+    c = a.lowestCommonAncestor(b, 5, 4)
+    print(c)
 
