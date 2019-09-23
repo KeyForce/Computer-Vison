@@ -48,13 +48,30 @@
 # 
 #
 # Definition for a binary tree node.
-# class TreeNode:
-#     def __init__(self, x):
-#         self.val = x
-#         self.left = None
-#         self.right = None
+class TreeNode:
+    def __init__(self, x):
+        self.val = x
+        self.left = None
+        self.right = None
 
 class Solution:
     def lowestCommonAncestor(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':
-        
+        parent_val = root.val
+        p_val = p.val
+        q_val = q.val
+        # 后序遍历 从第一个root开始递归
+        # p q 都大于root的值 说明p q 在root的右边
+        if p_val > parent_val and q_val > parent_val:    
+            return self.lowestCommonAncestor(root.right, p, q)
+        # p q 都小于root的值 说明p q 在root的左边
+        elif p_val < parent_val and q_val < parent_val:    
+            return self.lowestCommonAncestor(root.left, p, q)
+        else:
+            return root
+
+if __name__ == "__main__":
+    pass
+
+
+
 
