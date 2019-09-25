@@ -39,25 +39,32 @@
 # 
 # 
 #
+"""
+就是一种缓存淘汰策略
+Least Recently Used
+"""
 from collections import OrderedDict
-class LRUCache(OrderedDict):
-
+class LRUCache():
+    # 在末尾加入一项
+    # 去除最前端一项
+    # 将队列中某一项移到末尾
     def __init__(self, capacity: int):
+        self.hashLink = OrderedDict()
         self.capacity = capacity
 
     def get(self, key: int) -> int:
-        if key not in self:
+        if key not in self.hashLink:
             return -1
-        self.move_to_end(key)
-        return self[key]
+        self.hashLink.move_to_end(key)
+        return self.hashLink[key]
 
     def put(self, key: int, value: int) -> None:
-        if key in self:
-            self.move_to_end(key)
-        self[key] = value
-        if len(self) > self.capacity:
-            self.popitem(last=False)
-            
+        if key in self.hashLink:
+            self.hashLink.move_to_end(key)
+        self.hashLink[key] = value
+        if len(self.hashLink) > self.capacity:
+            self.hashLink.popitem(last=False)
+
 
 
 
