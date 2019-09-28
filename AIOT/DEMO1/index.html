@@ -4,14 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>AIOT</title>
 </head>
 <body>
     <h1>AIOT</h1>
     <div>设备地址：<p id="equipment-addr" style="display: inline;">无连接</p></div>
-    <div>最新数据：<p id="equipment-addr" style="display: inline;">无连接</p></div>
+    <div>最新数据：<p id="equipment-data" style="display: inline;">无数据</p></div>
     <button id="open">开灯</button>
-    <button id="close"">关灯</button>
+    <button id="close">关灯</button>
     <script>
         // 开灯函数
         function open(){
@@ -26,13 +26,14 @@
             oReq.send();
         }
         // 按钮事件
-        document.getElementById("open").addEventListener("click", open)
-        document.getElementById("close").addEventListener("click", open)
+        document.getElementById("open").addEventListener("click",open)
+        document.getElementById("close").addEventListener("click",close)
         // 获取数据函数
         function getData(){
             let oReq = new XMLHttpRequest();
-            oReq.open("GET", "/close");
-            oReq.onload = function callback(){
+            oReq.open("GET", "/data");
+            // 取得数据,并渲染到网页上
+            oReq.onload = function callback() {
                 let result = oReq.response;
                 let obj = JSON.parse(result);
                 document.getElementById("equipment-addr").textContent = obj.addr
