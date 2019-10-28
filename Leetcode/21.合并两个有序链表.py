@@ -44,8 +44,6 @@ class Solution:
             return l2
         
         
-
-
         
 # @lc code=end
 
