@@ -43,7 +43,7 @@ class Solution:
                 area = max(area, height[i]*(j-i))
                 i += 1
             else:
-                area = max(area, height[j]*(j-1))
+                area = max(area, height[j]*(j-i))
                 j -= 1
         return area
 # @lc code=end
