@@ -46,4 +46,8 @@ class Solution:
                 area = max(area, height[j]*(j-i))
                 j -= 1
         return area
+
+if __name__ == "__main__":
+    a = Solution
+    a.maxArea([1,2,3])
 # @lc code=end
