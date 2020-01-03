@@ -5,6 +5,7 @@
 __pycache__/
 *.py[cod]
 *$py.class
+/Domain-Adaptation/.idea
 
 # C extensions
 *.so
