@@ -45,7 +45,7 @@ class Solution:
                 return
             else:
                 s[i], s[j] = s[j], s[i]
-                recur(s, ++i, ++j)
+                recur(s, i+1, j-1)
         
         recur(s, 0, len(s)-1)
         
