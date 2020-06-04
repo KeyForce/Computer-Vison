@@ -112,3 +112,66 @@ change(num)
  
 ```
 
+## 提取不重复的整数
+
+```
+a= int(input())
+a = str(a)[::-1]
+res = ''
+for i in a:
+    if i not in res:
+        res +=i
+print(int(res))
+```
+
+## 字符个数统计
+
+```
+str = input()
+str_list = list(set(list(str)))
+countChar = 0
+for letter in str_list:
+    if ord(letter)>0 and ord(letter)<128:
+        countChar +=1
+print(countChar)
+```
+
+## 数字颠倒
+
+```
+print(input()[::-1])
+```
+
+## 字符串反转
+
+```
+print(input()[::-1])
+```
+
+## 句子逆序
+
+```
+input = input()
+input = input.split(' ')
+print(' '.join(input[::-1]))
+```
+
+## 字串的连接最长路径查找
+
+```
+n = input()
+a = []
+for i in range(int(n)):
+    a.append(input())
+a.sort()
+for i in range(int(n)):
+    print(a[i],end = '\n')
+```
+
+## 求int型正整数在内存中存储时1的个数
+
+```
+num = int(input())
+print(bin(num).count('1'))
+```
+
