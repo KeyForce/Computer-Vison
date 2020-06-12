@@ -1,5 +1,5 @@
-import itertools
-data = [i for i in range(10)]
+# import itertools
+# data = [i for i in range(10)]
 
 # count=0
 # for i in nums:
@@ -16,9 +16,9 @@ data = [i for i in range(10)]
 #     # print(b)
 
 # print(count)
-a=data[:5]
-b=data[5:10]
+# a=data[:5]
+# b=data[5:10]
 
-nums_a = itertools.permutations(a)
-print(len(list(nums_a)))
+# nums_a = itertools.permutations(a)
+# print(len(list(nums_a)))
 
