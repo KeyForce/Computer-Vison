@@ -20,11 +20,13 @@
 
   * 网页端实现开灯关灯
 
-![无标题](image/AIOT.png)
+<div align=center><img src ="image/AIOT.png"/></div>
+
+
 
 * Domain-Adaptation
 
-<img align='center' src="image/image-20200524152211570-1597029532519.png" width="500">
+  <div align=center><img src ="image/image-20200524152211570-1597029532519.png"width="550"/></div>
 
 ### 其他
 
