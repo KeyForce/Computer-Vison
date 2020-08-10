@@ -14,7 +14,20 @@
 
   ![1569054180948](image/1569054180948.png)
 
+* YOLO V4
+
+* [AIOT](https://github.com/KeyForce/Computer-Vison/tree/master/AIOT/DEMO1)
+
+  * 网页端实现开灯关灯
+
+![无标题](image/AIOT.png)
+
+* Domain-Adaptation
+
+<img align='center' src="image/image-20200524152211570-1597029532519.png" width="500">
+
 ### 其他
 
-* MyNote
+* [NoteBook](https://github.com/KeyForce/NoteBook)
 * Leetcode
+
