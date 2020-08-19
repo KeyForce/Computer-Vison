@@ -28,6 +28,16 @@
 
   <div align=center><img src ="image/image-20200524152211570-1597029532519.png"width="550"/></div>
 
+* 7-Segment-Digital-Recongnition
+
+  步骤1：提取仪表LCD显示屏。高斯滤波、Canny边缘检测、四点透视变换。
+
+  步骤2：提取数字区域。阈值处理、形态学操作。
+
+  步骤3：识别数字。SVM分类。
+
+  ![微信截图_20190517223708](image/微信截图_20190517223708.png)
+
 ### 其他
 
 * [NoteBook](https://github.com/KeyForce/NoteBook)
