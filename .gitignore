@@ -1,5 +1,7 @@
 *.sh
+.idea
 .vscode
+cmake-build-debug
 *.code-workspace
 /EL-Defect-Detection/文献
 # Byte-compiled / optimized / DLL files
