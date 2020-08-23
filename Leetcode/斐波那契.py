@@ -1,18 +1,20 @@
 def memo(func):
     cache = {}
-    def wrap(*args):
+    def wrap(*args, **kwargs):
         if args not in cache:
-            cache[args] = func(*args)
+            cache[args] = func(*args, **kwargs)
         return cache[args]
     return wrap
 
-
-# fibonacci=memo (fibonacci)
 @memo
 def fib(i):
     if i < 2:
         return 1
     return fib(i-1) + fib(i-2)
+
+fibonacci=memo(fib)
+
+
 
 
 print(fib(6))
