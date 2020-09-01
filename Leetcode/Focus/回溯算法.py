@@ -18,15 +18,15 @@ def base_backtrack(nums, track=[]):
 # 带记录
 def base2_backtrack(nums, used, track=[]):
     if len(track) == n:
-        res.append(track.copy())
+        res.append(track[:])
         return
 
     for i in range(n):
         if not used[i]:
-            used[i] = True
+            used[i] = 1
             track.append(nums[i])
-            backtrack(nums, track)
-            used[i] = False
+            base2_backtrack(nums, used, track)
+            used[i] = 0
             track.pop()
             
         
@@ -47,10 +47,12 @@ def backtrack(nums, track=[]):
         track.pop()
  
 res = []
-used = [False for _ in range(n)]
+base_backtrack(a_list)
+
+print('1：', res)
+
+res = []
+used = [0 for _ in range(n)]
 base2_backtrack(a_list, used)
 
-print(res)
-
-
-
+print('2：', res)
