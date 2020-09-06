@@ -9,19 +9,18 @@ print(res)
 
 
 def backtrack(nums, size, used, track=[]):
-    if size==0:
+    if size == 0:
         return
-    
-    
-    
-    for k,v in enumerate(nums):
+
+    for k, v in enumerate(nums):
         if not used[k]:
             track.append(v)
             result.append(track.copy())
-            used[k]= True
+            used[k] = True
             backtrack(nums, size-1, used, track)
             track.pop()
-            used[k]= False
+            used[k] = False
+
 
 result = []
 used = [False for i in range(len(nums))]

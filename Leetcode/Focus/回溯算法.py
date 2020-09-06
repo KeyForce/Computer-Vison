@@ -31,7 +31,7 @@ def base2_backtrack(nums, used, track=[]):
             
         
 def backtrack(nums, track=[]):
-    if len(track) == n:
+    if len(track) == (n-1):
         sum = 0
         for i in track:
             sum += i
@@ -56,3 +56,8 @@ used = [0 for _ in range(n)]
 base2_backtrack(a_list, used)
 
 print('2：', res)
+
+res = []
+backtrack(a_list)
+print('3：', res)
+print(len(res)%(10^9+7))
