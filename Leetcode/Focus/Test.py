@@ -31,4 +31,3 @@ station.append([d, 0])
 
 laji = minWater()
 print(laji.xiaolaji(w, station))
-
