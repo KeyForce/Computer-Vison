@@ -16,7 +16,7 @@
 
 * Classification
 
-  ![Figure_1 - 副本](image/Figure_1 - 副本.png)
+  ![Figure](image/Figure.png)
 
 * YOLO V4
 
