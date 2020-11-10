@@ -22,12 +22,17 @@ def base2_backtrack(nums, used, track=[]):
         return
 
     for i in range(n):
-        if not used[i]:
-            used[i] = 1
-            track.append(nums[i])
-            base2_backtrack(nums, used, track)
-            used[i] = 0
-            track.pop()
+        # 对已经使用过的进行剪枝
+        if used[i]: continue
+        # 对存在重复数字的全排列进行剪枝
+        if nums[i]==nums[i-1] and used[i-1]==0: continue
+        # DO
+        used[i] = 1
+        track.append(nums[i])
+        base2_backtrack(nums, used, track)
+        # UNDO
+        used[i] = 0
+        track.pop()
             
         
 def backtrack(nums, track=[]):
@@ -53,7 +58,7 @@ print('1：', res)
 
 res = []
 used = [0 for _ in range(n)]
-base2_backtrack(a_list, used)
+base2_backtrack([1,1,2], used)
 
 print('2：', res)
 
