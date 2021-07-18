@@ -1,0 +1,3 @@
+spk1 utt1 0.98
+spk2 utt2 0.34 
+spk1 utt3 0.47

@@ -58,10 +58,10 @@ Data = pca.fit_transform(X)
 fig = plt.figure(2)
 for i in range(10):
     number = np.array([Data[index] for index, v in enumerate(Y) if v == i])
-    for x, y in zip(number[:, 0], number[:, 1]):
-        c = cm.rainbow(int(255 * i / 9))  # 上色
-        plt.text(x, y, str(i), backgroundcolor=c)  # 标位子
-    # plt.scatter(number[:, 0], number[:, 1],label='Num-' + str(i))
+    # for x, y in zip(number[:, 0], number[:, 1]):
+    #     c = cm.rainbow(int(255 * i / 9))  # 上色
+    #     plt.text(x, y, str(i), backgroundcolor=c)  # 标位子
+    plt.scatter(number[:, 0], number[:, 1],label='Num-' + str(i))
 plt.xlabel('X')
 plt.ylabel('Y')
 plt.title('MNIST PCA 2D')

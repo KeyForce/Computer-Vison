@@ -30,6 +30,8 @@
 
 * Domain-Adaptation
 
+  ![image-20210718214819670](image/image-20210718214819670.png)
+
   <div align=center><img src ="image/image-20200524152211570-1597029532519.png"width="550"/></div>
 
 * 7-Segment-Digital-Recongnition
@@ -41,6 +43,12 @@
   步骤3：识别数字。SVM分类。
 
   <div align=center><img src ="image/微信截图_20190517223708.png"/></div>
+
+* EL-Defect-Detection
+
+  CAM激活可视化
+
+  ![image-20210718214936798](image/image-20210718214936798.png)
 
 ### 其他
 
